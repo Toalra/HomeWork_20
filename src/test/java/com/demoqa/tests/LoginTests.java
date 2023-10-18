@@ -24,7 +24,7 @@ public class LoginTests extends TestBase {
 
     @Test
     void successfulLoginWithApiTest() {
-        String authData = "{\"userName\": \"test1234560\", \"password\": \"Test123456@\": }";
+        String authData = "{\"userName\":\"test1234560\",\"password\":\"Test123456@\"}";
 
         Response authResponse = given()
                 .log().uri()
@@ -41,9 +41,8 @@ public class LoginTests extends TestBase {
                 .extract().response();
 
         open("/favicon.ico");
-
-        getWebDriver().manage().addCookie(new Cookie("userId", authResponse.path("userId")));
-        getWebDriver().manage().addCookie(new Cookie("username", authResponse.path("username")));
+        getWebDriver().manage().addCookie(new Cookie("userID", authResponse.path("userId")));
+        getWebDriver().manage().addCookie(new Cookie("expires", authResponse.path("expires")));
         getWebDriver().manage().addCookie(new Cookie("token", authResponse.path("token")));
 
         open("/profile");
