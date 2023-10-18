@@ -40,11 +40,13 @@ public class LoginTests extends TestBase {
                 .statusCode(200)
                 .extract().response();
 
+        open("/favicon.ico");
+
         getWebDriver().manage().addCookie(new Cookie("userId", authResponse.path("userId")));
         getWebDriver().manage().addCookie(new Cookie("username", authResponse.path("username")));
         getWebDriver().manage().addCookie(new Cookie("token", authResponse.path("token")));
 
-        open(" /profile");
+        open("/profile");
         $("#userName-value").shouldHave(text(login));
         }
 
