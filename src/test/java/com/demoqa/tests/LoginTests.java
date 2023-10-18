@@ -2,10 +2,12 @@ package com.demoqa.tests;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static com.demoqa.tests.TestData.login;
 import static com.demoqa.tests.TestData.password;
 import static io.restassured.RestAssured.given;
@@ -37,6 +39,10 @@ public class LoginTests extends TestBase {
                 .log().body()
                 .statusCode(200)
                 .extract().response();
+
+        getWebDriver().manage().addCookie(new Cookie("userId", authResponse.path("userId")));
+        getWebDriver().manage().addCookie(new Cookie("username", authResponse.path("username")));
+        getWebDriver().manage().addCookie(new Cookie("token", authResponse.path("token")));
 
         open(" /profile");
         $("#userName-value").shouldHave(text(login));
