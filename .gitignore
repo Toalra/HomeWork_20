@@ -4,6 +4,7 @@ batsettings.gradle
 build/
 gradle
 .idea
+settings.gradle
 
 *.class
 
