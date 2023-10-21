@@ -32,13 +32,13 @@ public class BooksListTest extends TestBase {
         listOfBooks.setUserId(loginResponse.getUserId());
         listOfBooks.setCollectionOfIsbns(isbnList);
 
-        DeleteBookModel deleteBookModel = new DeleteBookModel();
-        deleteBookModel.setIsbn("9781449331818");
-        deleteBookModel.setUserId(loginResponse.getUserId());
+        DeleteBookModel deleteBook = new DeleteBookModel();
+        deleteBook.setIsbn("9781449331818");
+        deleteBook.setUserId(loginResponse.getUserId());
 
         booksApi.deleteAllBooks(loginResponse);
         booksApi.addBook(loginResponse, listOfBooks);
-        booksApi.deleteOneBook(loginResponse, deleteBookModel);
+        booksApi.deleteOneBook(loginResponse, deleteBook);
 
         open("/favicon.ico");
         getWebDriver().manage().addCookie(new Cookie("userID", loginResponse.getUserId()));
