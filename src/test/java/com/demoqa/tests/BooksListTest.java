@@ -46,7 +46,7 @@ public class BooksListTest extends TestBase {
         getWebDriver().manage().addCookie(new Cookie("expires", loginResponse.getExpires()));
 
         open("/profile");
-        $(".ReactTable").shouldHave(text("Learning JavaScript Design Patterns"));
+        $("[id='see-book-Learning JavaScript Design Patterns']").shouldHave(text("Learning JavaScript Design Patterns"));
 
     }
 }
